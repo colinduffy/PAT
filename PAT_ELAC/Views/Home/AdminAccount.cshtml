@@ -1,0 +1,76 @@
+﻿@model IEnumerable<PAT_ELAC.Models.QM>
+@{
+    ViewBag.Title = "AdminAccount";
+    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 7,
+    selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+    grid.Pager(WebGridPagerModes.NextPrevious);   
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+
+<h1 align="center">
+    @User.Identity.Name
+</h1>
+<style type="text/css">
+    .webGrid { margin: 4px; border-collapse: collapse; width: 500px;  background-color:#FFFFFF;}
+    .header { background-color: #C1D4E6; font-weight: bold; color: #FFF; }
+    .webGrid th, .webGrid td { border: 1px solid #C0C0C0; padding: 5px; }
+    .alt { background-color: #E4E9F5; color: #000; }
+    .gridHead a:hover {text-decoration:underline;}
+    .description { width:auto}
+    .select{background-color: #71857C}
+</style>
+<section> 
+   <div id="gridContent" class="float-right">
+        <br />
+        @grid.GetHtml(tableStyle: "webGrid",
+                headerStyle: "header",
+                alternatingRowStyle: "alt",
+                selectedRowStyle: "select",
+                columns: grid.Columns(
+                grid.Column("Question.Question", "Question"),
+                grid.Column("Topic.description", "Topic"),
+                grid.Column("percent", "Percent"),
+                grid.Column("correct", "Correct"),
+                grid.Column("total", "Total"))
+                )
+
+    </div>
+    </section>
+
+
+
+<section align="left">
+    <h2>
+        <u>Manage</u>
+    </h2>
+    <!--button type="button"><b>CRUD Questions</b></button>
+    <button type="button"><b>CRUD and Manage Topics</b></button>
+    <!button type="button"><b>Create/Manage Tests</b></button-->
+    <div>
+    @Html.ActionLink("UploadFile", "Upload")
+        @Html.ActionLink("Manage Topics", "Index", "Topic")
+    @Html.ActionLink("Manage Questions", "Index", "Question")
+        </div>
+    <div>
+    @Html.ActionLink("Manage Tests", "Index", "Test")
+    @Html.ActionLink("Manage Resourcess", "Index", "Resource")
+    
+
+    @if (ViewContext.HttpContext.User.IsInRole("SuperAdmin"))
+    {
+         @Html.ActionLink("Register Admin", "RegisterAdmin", "Account")
+           
+    }
+ </div>
+</section>
+
+
+<section align="left">
+    <h2>
+        <u>Student Management</u>
+    </h2>
+    <button type="button" onclick="AdminStudentInfo">@Html.ActionLink("Student Info", "AdminStudentInfo")</button>
+</section>
+

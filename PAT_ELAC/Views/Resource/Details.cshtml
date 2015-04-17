@@ -1,0 +1,29 @@
+﻿@model PAT_ELAC.Models.Resource
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Resource</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TopicId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TopicId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Link)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Link)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ResourceId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

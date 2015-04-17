@@ -1,0 +1,42 @@
+﻿@model IEnumerable<PAT_ELAC.Models.AdminStudentInfo>
+@{
+    ViewBag.Title = "AdminStudentInfo";
+    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 10,
+    selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+    grid.Pager(WebGridPagerModes.NextPrevious);
+}
+<head>
+
+</head>
+<style type="text/css">
+    .webGrid { margin: 4px; border-collapse: collapse; width: 500px;  background-color:#FFFFFF;}
+    .header { background-color: #C1D4E6; font-weight: bold; color: #FFF; white-space: nowrap; }
+    .webGrid th, .webGrid td { border: 1px solid #C0C0C0; padding: 5px; }
+    .alt { background-color: #E4E9F5; color: #000; }
+    .gridHead a:hover {text-decoration:underline;}
+    .description { width:auto}
+    .select{background-color: #71857C}
+    .center { margin-left: auto; margin-right: auto; width: 70%;}
+</style>
+
+
+<body>
+
+   <div id="gridContent" class="center">
+        @grid.GetHtml(tableStyle: "webGrid",
+                headerStyle: "header",
+                alternatingRowStyle: "alt",
+                selectedRowStyle: "select",
+                columns: grid.Columns(
+                grid.Column("LastName", "Last Name"),
+                grid.Column("FirstName", "First Name"),
+                grid.Column("Phone", "Phone #"),
+                grid.Column("StudentId", "Student ID"),
+                grid.Column("EnglishPlacement", "English Placement"),
+                grid.Column("MathPlacement", "English Placement"))
+                )
+    </div>
+
+
+</body>
+

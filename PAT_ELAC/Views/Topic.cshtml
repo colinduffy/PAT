@@ -1,0 +1,32 @@
+﻿@model PAT_ELAC.Models.TopicCreateModel
+@{
+    ViewBag.Title = "Topic";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<h2>Topic</h2>
+<section class="social" id="topicCreateForm">
+    <h2>Create a new Topic</h2>
+    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <legend>Topic Creation</legend>
+
+            <ol>
+                <li>
+                    @Html.Label("Topic Name ")
+                    @Html.TextBoxFor(m => m.description)
+                </li>
+                //TODO: add tests to associate these topics with
+            </ol>
+            <input type="submit" value="Create Topic" />
+        </fieldset>
+    }
+</section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

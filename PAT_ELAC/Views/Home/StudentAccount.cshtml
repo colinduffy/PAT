@@ -1,0 +1,88 @@
+﻿@model PAT_ELAC.Models.Student
+@{
+    ViewBag.Title = "StudentAccount";
+
+    var grid = new WebGrid(Model.Tests, canPage: true, rowsPerPage: 7,
+    selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+    grid.Pager(WebGridPagerModes.NextPrevious);
+}
+<head>
+    <title>Student Profile</title>
+</head>
+
+<h1 align="center">
+    @User.Identity.Name
+</h1>
+<style type="text/css">
+    .webGrid { margin: 4px; border-collapse: collapse; width: 500px;  background-color:#FFFFFF;}
+    .header { background-color: #C1D4E6; font-weight: bold; color: #FFF; }
+    .webGrid th, .webGrid td { border: 1px solid #C0C0C0; padding: 5px; }
+    .alt { background-color: #E4E9F5; color: #000; }
+    .gridHead a:hover {text-decoration:underline;}
+    .description { width:auto}
+    .select{background-color: #71857C}
+</style> 
+
+<section>
+    <div id="gridContent" class="float-right">
+        <br />
+        @grid.GetHtml(tableStyle: "webGrid",
+                headerStyle: "header",
+                alternatingRowStyle: "alt",
+                selectedRowStyle: "select",
+                columns: grid.Columns(
+                grid.Column("TestDescription", "Test"),
+                grid.Column("Test.Passed", "Passed"),
+                grid.Column("Detail", format: @<text>@Html.ActionLink("Review", "ResourceRedirect",
+                    new { t = item.Test.TakenId }) </text>))
+                )
+
+    </div>
+</section>
+
+<section>
+    <h2>
+        <u>Current Placement</u>
+    </h2>
+    <p>
+        <b>English:</b> @Model.EnglishPlacement
+    </p>
+    <p>
+        <b>Math:</b> @Model.MathPlacement
+    </p>
+</section>
+
+<section>
+    <h2>
+        <u>Take Tests</u>
+    </h2>
+    @using (Html.BeginForm())
+{
+                <br />
+                <div class="editor-field">
+                   @Html.DropDownListFor(model => model.EnglishId, Model.EnglishTests)
+                    @Html.ValidationMessageFor(model => model.EnglishId) 
+                </div> 
+        <button type="submit" id="btnEnglishTest" name="Command" value="english">ENGLISH TEST</button> 
+    
+
+
+                <br />
+                <div class="editor-field">
+                   @Html.DropDownListFor(model => model.MathId, Model.MathTests)
+                    @Html.ValidationMessageFor(model => model.MathId) 
+                </div>    
+    <button type="submit" id="btnMathTest" name="Command" value="math">MATH TEST</button> 
+}
+</section>
+
+
+
+
+
+
+
+
+
+
+

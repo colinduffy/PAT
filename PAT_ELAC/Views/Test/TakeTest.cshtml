@@ -1,0 +1,37 @@
+﻿@model PAT_ELAC.Models.TakeTest
+
+@{
+    ViewBag.Title = "TakeTest";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.TestId)
+    @Html.HiddenFor(model => model.Threshold)
+
+    for (var i = 0; i < Model.Questions.Count(); i++)
+    {
+        <div>
+            @Model.Questions[i].Question.Question
+        </div>
+    
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Questions[i].Question.Question)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.Questions[i].Value)
+            @Html.HiddenFor(model => model.Questions[i].Question.Question)
+            @Html.HiddenFor(model => model.Questions[i].Question.QuestionId)
+            @Html.HiddenFor(model => model.Questions[i].Question.TopicId) 
+        </div>
+        for (var j = 0; j < Model.Questions[i].Answers.Count(); j++)
+        { 
+            <div>
+                @Html.RadioButtonFor(model => model.Answers[i], Model.Questions[i].Answers[j].AnswerId)@Model.Questions[i].Answers[j].Answer
+            </div>            
+        }
+    }
+    
+    <input type="submit" value="Submit" />    
+}

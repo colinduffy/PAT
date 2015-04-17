@@ -1,0 +1,18 @@
+﻿@model String
+@{
+    ViewBag.Title = "Test";
+}
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model)
+            @Html.ValidationMessageFor(model => model)
+        </div>
+
+            <p>
+            <input type="submit" value="Test" />
+        </p>
+
+<h2>Test</h2>

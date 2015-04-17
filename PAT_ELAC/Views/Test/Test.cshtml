@@ -1,0 +1,54 @@
+﻿@model PAT_ELAC.Models.TestCreateModel
+@{
+    ViewBag.Title = "Test";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<h2>Test</h2>
+<section class="social" id="testCreateForm">
+    <h2>Create a new Test</h2>
+    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <legend>Test Creation</legend>
+
+            <ol>
+                <li>
+                    @Html.Label("Test Description: ")
+                    @Html.TextAreaFor(m => m.description)
+                </li>
+
+                <li>
+                    @{
+                        List<SelectListItem> listItems = new List<SelectListItem>();
+                        listItems.Add(new SelectListItem
+                            {
+                                Text = "Math",
+                                Value = "Math"
+                            });
+                        listItems.Add(new SelectListItem
+                             {
+                                 Text = "English",
+                                 Value = "English",
+                                 Selected = true
+                             });
+                     }
+                    @Html.DropDownListFor(m => m.type, listItems, "Select Test Type")
+                </li>
+                <li>
+                    @Html.Label("Level (Value, Name): ")
+                    @Html.ValueFor(m => m.level)
+                    @Html.TextAreaFor(m => m.level)
+                </li>
+            </ol>
+            <input type="submit" value="Create test" />
+        </fieldset>
+    }
+</section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

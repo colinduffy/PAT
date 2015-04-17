@@ -1,0 +1,52 @@
+﻿@model PAT_ELAC.Models.QuestionCreateModel
+@{
+    ViewBag.Title = "Create";
+}
+<h2>Create</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <legend>Question</legend>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Question)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Question)
+                    @Html.ValidationMessageFor(model => model.Question)
+                </div>
+                <div class="editor-label">
+                   @Html.LabelFor(model => model.TopicId)   
+                </div>
+                <div class="editor-field">
+                   @Html.DropDownListFor(model => model.TopicId, Model.Topics)
+                   
+                    @Html.ValidationMessageFor(model => model.TopicId) 
+                </div>
+                
+                @for (int i = 0; i < 5; i++)
+                {
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Answers[i].Answer)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Answers[i].Answer)
+                        @Html.ValidationMessageFor(model => model.Answers[i].Answer)
+                    </div>
+                    <div>
+                        @Html.RadioButtonFor(model => model.Answer, i)
+                    </div>
+                }
+
+
+            <input type="submit" value="Create" />
+        </fieldset>
+    }
+    <div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

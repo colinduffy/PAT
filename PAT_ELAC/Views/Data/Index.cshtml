@@ -1,0 +1,31 @@
+﻿@model IEnumerable<PAT_ELAC.Models.AnsweredQuestionsModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table>
+    <tr>
+        <th>
+            Question
+        </th>
+        <th></th>
+    </tr>
+
+@* Todo: change to browse through questions instead of each answer. *@
+@foreach (var question in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => question.choice)
+        </td>
+        <td>
+           
+        </td>
+    </tr>
+}
+
+</table>
+

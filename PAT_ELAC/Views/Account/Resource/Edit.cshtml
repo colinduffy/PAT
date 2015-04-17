@@ -1,0 +1,45 @@
+﻿@model PAT_ELAC.Models.Resource
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Resource</legend>
+
+        @Html.HiddenFor(model => model.ResourceId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TopicId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.TopicId, Model.Topics)
+            @Html.ValidationMessageFor(model => model.TopicId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Link)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Link)
+            @Html.ValidationMessageFor(model => model.Link)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
